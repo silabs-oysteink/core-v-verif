@@ -68,8 +68,10 @@ BANNER=*************************************************************************
 
 CV32E40P_REPO   ?= https://github.com/openhwgroup/cv32e40p
 CV32E40P_BRANCH ?= master
+#2020-10-01
+CV32E40P_HASH   ?= 80c1d3fe2c0a6cbcd4e02956bbe6c2a0ee5313a3
 #2020-09-24
-CV32E40P_HASH   ?= f04f1e8c0c2fde1dc353667612a48a6e95f7b366
+#CV32E40P_HASH   ?= f04f1e8c0c2fde1dc353667612a48a6e95f7b366
 #2020-09-17
 #CV32E40P_HASH   ?= 5c97310505eddbe36a429fd2fc9e0781ff89cd2f
 
@@ -353,6 +355,7 @@ clean-bsp:
 # Special debug_test build
 # keep raw elf files to generate helpful debugging files such as dissambler
 .PRECIOUS : %debug_test.elf
+.PRECIOUS : %debug_test_reset.elf
 
 # Prepare file list for .elf
 # Get the source file names from the BSP directory
@@ -372,6 +375,12 @@ PREREQ_TEST_FILES = $(filter %.c %.S,$(wildcard $(dir %)*))
 TEST_FILES        = $(filter %.c %.S,$(wildcard $(dir $*)*))
 
 %debug_test.elf:
+	$(RISCV_EXE_PREFIX)gcc -mabi=ilp32 -march=rv32imc -o $@ \
+		-Wall -pedantic -Os -g -nostartfiles -static \
+		$(BSP_FILES) \
+		$(TEST_FILES) \
+		-T $(BSP)/link.ld
+%debug_test_reset.elf:
 	$(RISCV_EXE_PREFIX)gcc -mabi=ilp32 -march=rv32imc -o $@ \
 		-Wall -pedantic -Os -g -nostartfiles -static \
 		$(BSP_FILES) \
