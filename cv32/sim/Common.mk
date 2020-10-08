@@ -69,15 +69,7 @@ BANNER=*************************************************************************
 CV32E40P_REPO   ?= https://github.com/openhwgroup/cv32e40p
 CV32E40P_BRANCH ?= master
 #2020-10-08
-CV32E40P_HASH    ?= 7d2ff67792aa73a9bad103b167e4bb95a3b0d61d
-#2020-10-05
-#CV32E40P_HASH   ?= 7294cc3682003fdf576ecc56d4b4090c5b59edee
-#2020-10-01
-#CV32E40P_HASH   ?= 80c1d3fe2c0a6cbcd4e02956bbe6c2a0ee5313a3
-#2020-09-24
-#CV32E40P_HASH   ?= f04f1e8c0c2fde1dc353667612a48a6e95f7b366
-#2020-09-17
-#CV32E40P_HASH   ?= 5c97310505eddbe36a429fd2fc9e0781ff89cd2f
+CV32E40P_HASH   ?= f6196bf
 
 FPNEW_REPO      ?= https://github.com/pulp-platform/fpnew
 FPNEW_BRANCH    ?= master
@@ -399,7 +391,7 @@ TEST_FILES        = $(filter %.c %.S,$(wildcard $(dir $*)*))
 %.elf: %.c %.S
 	make bsp
 	test_asm_src=$(basename )
-	$(RISCV_EXE_PREFIX)gcc $(CFLAGS) -o $@ \
+	$(RISCV_EXE_PREFIX)gcc $(CFG_CFLAGS) $(CFLAGS) -o $@ \
 		-nostartfiles \
 		$^ -T $(BSP)/link.ld -L $(BSP) -lcv-verif
 
@@ -407,14 +399,14 @@ TEST_FILES        = $(filter %.c %.S,$(wildcard $(dir $*)*))
 %.elf: %.c
 	make bsp
 	test_asm_src=$(basename )
-	$(RISCV_EXE_PREFIX)gcc $(CFLAGS) -o $@ \
+	$(RISCV_EXE_PREFIX)gcc $(CFG_CFLAGS) $(CFLAGS) -o $@ \
 		-nostartfiles \
 		$^ -T $(BSP)/link.ld -L $(BSP) -lcv-verif
 
 # This target selected if only %.S exists
 %.elf: %.S
 	make bsp
-	$(RISCV_EXE_PREFIX)gcc $(CFLAGS) -o $@ \
+	$(RISCV_EXE_PREFIX)gcc $(CFG_CFLAGS) $(CFLAGS) -v -o $@ \
 		-nostartfiles \
 		-I $(ASM) \
 		$^ -T $(BSP)/link.ld -L $(BSP) -lcv-verif
