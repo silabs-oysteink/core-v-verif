@@ -66,10 +66,10 @@ BANNER=*************************************************************************
 #      *_TAG:    Not yet supported (TODO).
 #                
 
-CV32E40P_REPO   ?= https://github.com/openhwgroup/cv32e40p
-CV32E40P_BRANCH ?= master
+CV32E40P_REPO   ?= https://github.com/strichmo/cv32e40p
+CV32E40P_BRANCH ?= strichmo/temp/tracer_with_ebrk
 #2020-10-08
-CV32E40P_HASH   ?= f6196bf
+CV32E40P_HASH   ?= 603a50dbd2e94aa5c26ba0dbe9b0247f9a3dd3ef
 
 FPNEW_REPO      ?= https://github.com/pulp-platform/fpnew
 FPNEW_BRANCH    ?= master
