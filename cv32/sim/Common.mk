@@ -69,7 +69,7 @@ BANNER=*************************************************************************
 CV32E40P_REPO   ?= https://github.com/strichmo/cv32e40p
 CV32E40P_BRANCH ?= strichmo/temp/tracer_with_ebrk
 #2020-10-08
-CV32E40P_HASH   ?= 603a50dbd2e94aa5c26ba0dbe9b0247f9a3dd3ef
+CV32E40P_HASH   ?= 90c23eb761c25ee8dd29453f4648266c89ed44c6
 
 FPNEW_REPO      ?= https://github.com/pulp-platform/fpnew
 FPNEW_BRANCH    ?= master
